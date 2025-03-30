@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Test</title>
+    <script>
+    async function testLogin() {
+        const response = await fetch('backend/user-auth.php?test=1');
+        const result = await response.json();
+        
+        if (result.status === 'success') {
+            alert('Login successful! Redirecting to dashboard...');
+            window.location.href = result.redirect;
+        } else {
+            alert('Login failed: ' + result.message);
+        }
+    }
+    </script>
+</head>
+<body>
+    <button onclick="testLogin()">Test Admin Login</button>
+</body>
+</html>
