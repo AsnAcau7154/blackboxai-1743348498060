@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- [Previous head content remains the same] -->
+    <script>
+        // Handle form submission
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const response = await fetch('backend/user-auth.php', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const result = await response.json();
+            
+            if (result.status === 'success') {
+                window.location.href = result.redirect;
+            } else {
+                alert(result.message);
+            }
+        });
+
+        // Handle registration
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            formData.append('action', 'register');
+            
+            const response = await fetch('backend/user-auth.php', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const result = await response.json();
+            
+            if (result.status === 'success') {
+                window.location.href = result.redirect;
+            } else {
+                alert(result.message);
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- [Previous body content remains the same] -->
+</body>
+</html>
